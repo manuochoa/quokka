@@ -10,6 +10,7 @@ export default function ConnectPopup({
   setPopupVisible,
   connectMetamask,
   connectWalletConnect,
+  userAddress,
 }) {
   const [checkboxes, setCheckboxes] = useState({
     metamask: false,
@@ -25,6 +26,7 @@ export default function ConnectPopup({
       className="popup--connect"
       popupShow={popupVisible}
       setPopupShow={setPopupVisible}
+      userAddress={userAddress}
     >
       <header className="popup__header">
         <button className="popup__back" onClick={closePopup}>

@@ -197,7 +197,11 @@ export default function App() {
 
   return (
     <NotificationProvider>
-      <Header popupVisible={popupVisible} setPopupVisible={setPopupVisible} />
+      <Header
+        userAddress={userAddress}
+        popupVisible={popupVisible}
+        setPopupVisible={setPopupVisible}
+      />
       <main className="main container">
         <div className="main__top">
           <div className="main__column main__column--1 main__column--top">
@@ -264,6 +268,7 @@ export default function App() {
         connectWalletConnect={connectWalletConnect}
         popupVisible={popupVisible}
         setPopupVisible={setPopupVisible}
+        userAddress={userAddress}
       />
     </NotificationProvider>
   );
