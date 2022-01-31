@@ -1,0 +1,171 @@
+/*-------- Main --------*/
+
+.main {
+  padding-top: 30px;
+  padding-bottom: 45px;
+
+  &__background {
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(232, 232, 232, 0.3);
+    backdrop-filter: blur(40px);
+    border-radius: 20px;
+  }
+
+  &__background--top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &__selected-icon {
+    height: 80px;
+  }
+
+  &__column--1 {
+    width: 34%;
+  }
+
+  &__column--2 {
+    width: 66%;
+    padding-left: 30px;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 100px;
+    margin-bottom: 30px;
+  }
+
+  &__column--top {
+    height: 100%;
+  }
+
+  &__selected {
+    display: flex;
+    align-items: center;
+  }
+
+  &__selected-text {
+    margin-left: 22px;
+    margin-right: auto;
+    font-family: $font-b;
+    font-size: 20px;
+  }
+
+  &__status {
+    text-align: right;
+  }
+
+  &__status-title {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+  }
+
+  &__status-text {
+    margin-top: 6px;
+    font-size: 16px;
+    color: $blue;
+  }
+
+  &__wrapper {
+    display: flex;
+  }
+}
+
+@media (max-width: 1099px) {
+  .main {
+    &__top {
+      margin-bottom: 20px;
+    }
+
+    &__column--2 {
+      padding-left: 20px;
+    }
+  }
+}
+
+@media (max-width: 989px) {
+  .main {
+    padding-top: 130px;
+    padding-bottom: 130px;
+
+    &__top {
+      flex-direction: column;
+      height: auto;
+    }
+
+    &__column--top {
+      height: 72px;
+    }
+
+    &__column--top:nth-child(2) {
+      margin-top: 20px;
+    }
+
+    &__column {
+      width: 100%;
+    }
+
+    &__column--2 {
+      padding-left: 0;
+    }
+
+    &__background {
+      padding: 15px;
+    }
+
+    &__selected-icon {
+      width: 48px;
+    }
+
+    &__selected-text {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 479px) {
+  .main {
+    padding-top: 94px;
+    padding-bottom: 102px;
+
+    &__background--top {
+      padding-top: 12px;
+      padding-bottom: 12px;
+
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &__selected-icon {
+      margin-right: 10px;
+    }
+
+    &__selected-text {
+      width: calc(100% - 58px);
+      margin-left: 0;
+      font-size: 16px;
+    }
+
+    &__status {
+      width: calc(100% - 58px);
+      margin-left: 0;
+      text-align: left;
+    }
+
+    &__status-text {
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    &__status-title {
+      display: none;
+    }
+  }
+}

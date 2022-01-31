@@ -1,0 +1,187 @@
+/*-------- Input --------*/
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 64px;
+
+    &__row {
+        display: flex;
+        align-items: center;
+
+        width: 73%;
+        height: 100%;
+
+        padding: 0 24px;
+
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(232, 232, 232, 0.3);
+        border-right: none;
+        border-radius: 12px 0 0 12px;
+    }
+
+    &__button {
+        width: 27%;
+        height: 100%;
+
+        background-color: $black;
+        border-radius: 0 12px 12px 0;
+
+        font-family: $font-b;
+        font-size: 20px;
+        color: #ffffff;
+
+        transition: background-color 0.2s ease-out;
+    }
+
+    &__button:hover {
+        background-color: #302727;
+    }
+
+    &__icon-wrapper {
+        display: flex;
+        align-items: center;
+
+        height: 24px;
+        padding-right: 20px;
+        margin-right: 24px;
+
+        border-right: 1px solid rgba(232, 232, 232, 0.5);
+    }
+
+    &__icon {
+        display: block;
+        height: 20px;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    &__arrows {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-left: auto;
+    }
+
+    &__arrow {
+        width: 10px;
+        height: 10px;
+
+        border: 3px solid #ffffff;
+        border-left: none;
+        border-top: none;
+        border-radius: 2px;
+
+        transform: rotateZ(45deg);
+
+        transition: border-color 0.2s ease-out;
+    }
+
+    &__arrow--top {
+        transform: rotateZ(-135deg);
+    }
+
+    &__arrow:hover {
+        border-color: $blue;
+    }
+}
+
+.input {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    padding-right: 20px;
+
+    background: transparent;
+    border: none;
+
+    font-family: $font-r;
+    font-size: 22px;
+    color: #ffffff;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.input-wrapper {
+
+    &--invest {
+        margin-top: 26px;
+    }
+}
+
+@media (max-width: 619px) {
+
+    .input-wrapper {
+
+        &--invest {
+            height: 56px;
+        }
+
+        &--invest &__row {
+            padding: 0 20px;
+        }
+
+        &--invest &__icon-wrapper {
+            padding-right: 15px;
+            margin-right: 15px;
+        }
+
+        &--invest &__input {
+            font-size: 18px;
+        }
+
+        &--invest &__button {
+            font-size: 18px;
+        }
+    }
+}
+
+@media (max-width: 479px) {
+
+    .input-wrapper {
+
+        &--invest {
+            margin-top: 18px;
+        }
+
+        &--invest &__row {
+            width: 71%;
+            padding-left: 12px;
+            padding-right: 16px;
+        }
+
+        &--invest &__button {
+            width: 29%;
+            font-size: 14px;
+        }
+
+        &--invest &__input {
+            font-size: 16px;
+            padding-right: 16px;
+        }
+
+        &--invest &__arrow {
+            width: 8px;
+            height: 8px;
+            border-width: 2px;
+        }
+
+        &--invest &__icon-wrapper {
+            height: 20px;
+            padding-right: 12px;
+            margin-right: 12px;
+        }
+
+        &--invest &__icon {
+            height: 100%;
+        }
+    }
+}

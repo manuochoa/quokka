@@ -1,0 +1,58 @@
+/*-------- Claim --------*/
+
+.claim {
+    margin-top: 30px;
+    padding: 28px;
+    padding-bottom: 60px;
+    border-radius: 20px;
+
+    background-image: url(../../images/claimBackground.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    text-align: center;
+
+    &__text {
+        margin-top: 30px;
+        font-size: 20px;
+    }
+
+    &__button {
+        margin-top: 42px;
+        padding: 0 92px;
+    }
+}
+
+@media (max-width: 1099px) {
+
+    .claim {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 989px) {
+
+    .claim {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 479px) {
+
+    .claim {
+        padding-bottom: 68px;
+        padding-top: 32px;
+
+        &__text {
+            margin-top: 28px;
+            font-size: 16px;
+        }
+
+        &__button {
+            margin-top: 24px;
+            padding: 0 62px;
+        }
+    }
+}

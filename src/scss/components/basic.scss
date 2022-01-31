@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    min-width: 320px;
+
+    font-family: $font-r;
+    font-size: 16px;
+    color: #ffffff;
+
+    background: url(../../images/background.svg), linear-gradient(87.58deg, #3768b1 1.72%, #1b3652 95.07%), #ffffff;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+
+button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+a {
+    text-decoration: none;
+    outline: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
+
+.logo {
+    color: #ffffff;
+
+    &__icon {
+        display: block;
+        width: 100%;
+    }
+}
+
+.scrollwrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 4px;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+    .scrollwrapper {
+        padding-right: 0 !important;
+
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
+    }
+}
+
+@media (max-width: 479px) {
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .logo {
+        width: 28px;
+    }
+}

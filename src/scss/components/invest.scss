@@ -1,0 +1,46 @@
+/*-------- Invest --------*/
+
+.invest {
+    padding-bottom: 38px;
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 24px;
+    }
+
+    &__button {
+        width: 49%;
+    }
+}
+
+@media (max-width: 989px) {
+
+    .invest {
+        width: 100%;
+    }
+}
+
+@media (max-width: 619px) {
+
+    .invest {
+
+        &__button {
+            height: 50px;
+            font-size: 18px;
+        }
+    }
+}
+
+@media (max-width: 479px) {
+
+    .invest {
+        padding: 32px 16px;
+
+        &__button {
+            width: 48%;
+            height: 48px;
+            font-size: 14px;
+        }
+    }
+}

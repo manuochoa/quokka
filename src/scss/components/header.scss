@@ -1,0 +1,130 @@
+/*-------- Header --------*/
+
+.header {
+    border-bottom: 1px solid rgba(232, 232, 232, 0.3);
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        height: 94px;
+    }
+
+    &__account {
+        margin-left: auto;
+        margin-right: 35px;
+    }
+
+    &__account-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        color: #ffffff;
+    }
+
+    &__account-row:nth-child(1) {
+        margin-bottom: 8px;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    button.header__account-row:hover {
+        text-decoration: underline;
+    }
+
+    &__account-icon {
+        margin-right: 8px;
+    }
+
+    &__account-title {
+        font-size: 14px;
+    }
+
+    &__account-address {
+        font-family: $font-b;
+    }
+
+    &__disconnect {
+        color: #ffffff;
+        transition: color 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    &__disconnect:hover {
+        color: rgba(24, 130, 252, 0.884);
+    }
+
+    &__disconnect-icon {
+        display: block;
+    }
+}
+
+@media (max-width: 989px) {
+
+    .header {
+        width: 100%;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 20;
+
+        background: #182230;
+        box-shadow: 0px 12px 20px rgba(63, 75, 99, 0.12);
+        border: none;
+    }
+}
+
+@media (max-width: 619px) {
+
+    .header {
+
+        &__account {
+            max-width: 50%;
+            margin-right: 10px;
+        }
+
+        &__account-row {
+            max-width: 100%;
+        }
+
+        &__account-row:nth-child(1) {
+            margin-bottom: 4px;
+        }
+
+        &__account-icon {
+            flex-shrink: 0;
+            margin-right: 8px;
+            width: 14px;
+            height: auto;
+        }
+
+        &__account-address {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+        }
+
+        &__account-title {
+            font-size: 10px;
+        }
+
+        &__disconnect {
+            width: 20px;
+        }
+
+        &__disconnect-icon {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 479px) {
+
+    .header {
+        
+        &__wrapper {
+            height: 70px;
+        }
+    }
+}
