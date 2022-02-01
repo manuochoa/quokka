@@ -9,7 +9,12 @@ import Claim from "./components/Claim";
 import ConnectPopup from "./components/ConnectPopup";
 import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
-import { getActiveProjects, getUserInvestment } from "./blockchain/functions";
+import {
+  getActiveProjects,
+  getUserInvestment,
+  getBUSDAllowance,
+  ClaimMyTokens,
+} from "./blockchain/functions";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 export default function App() {
@@ -17,6 +22,8 @@ export default function App() {
   const [walletType, setWalletType] = useState("");
   const [popupVisible, setPopupVisible] = useState(false);
   const [mobileScreen, setMobileScreen] = useState(false);
+  const [isBUSDApproved, setIsBUSDApproved] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState([
     {
       id: 0,
@@ -32,6 +39,8 @@ export default function App() {
       TokensPaidOut: 0,
       USDInvested: 0,
       totalTokens: 0,
+      claimStatus: false,
+      investStatus: false,
       countdown: {
         Days: 0,
         Hours: 0,
@@ -53,6 +62,8 @@ export default function App() {
     TokensPaidOut: 0,
     USDInvested: 0,
     totalTokens: 0,
+    claimStatus: false,
+    investStatus: false,
     countdown: {
       Days: 0,
       Hours: 0,
@@ -156,7 +167,6 @@ export default function App() {
       depositedUSD: 0,
       tokensReceived: 0,
     });
-    console.log("user investment", id);
     if (userAddress) {
       let investment = await getUserInvestment(id, userAddress);
       if (investment) {
@@ -166,7 +176,31 @@ export default function App() {
     }
   };
 
+  const checkAllowance = async () => {
+    if (userAddress) {
+      let allowance = await getBUSDAllowance(userAddress);
+      console.log(allowance, "allowance");
+      setIsBUSDApproved(allowance);
+    }
+  };
+
+  const handleClaim = async (projectId) => {
+    setIsLoading(true);
+    let receipt = await ClaimMyTokens(projectId, walletType);
+    if (receipt) {
+      console.log(receipt);
+      getUserProjectInvestment(projectId);
+    }
+    setIsLoading(false);
+  };
+
   useEffect(() => {
+    let user = window.localStorage.getItem("userAddress");
+
+    if (user) {
+      connectMetamask();
+    }
+
     function handleMobileScreen() {
       setMobileScreen(window.innerWidth < 990);
     }
@@ -194,6 +228,10 @@ export default function App() {
   useEffect(() => {
     getUserProjectInvestment(selectedProject.id);
   }, [selectedProject, userAddress]);
+
+  useEffect(() => {
+    checkAllowance();
+  }, [userAddress]);
 
   return (
     <NotificationProvider>
@@ -235,10 +273,17 @@ export default function App() {
               style={{ display: sections[0] ? "block" : "none" }}
             />
             <Invest
+              getUserProjectInvestment={getUserProjectInvestment}
+              userAddress={userAddress}
+              walletType={walletType}
+              checkAllowance={checkAllowance}
+              isBUSDApproved={isBUSDApproved}
               project={selectedProject}
               style={{ display: sections[1] ? "block" : "none" }}
             />
             <Claim
+              isLoading={isLoading}
+              handleClaim={handleClaim}
               userInvestment={userInvestment}
               project={selectedProject}
               style={{ display: sections[2] ? "block" : "none" }}
@@ -253,8 +298,17 @@ export default function App() {
               />
             </div>
             <div className="main__column main__column--2">
-              <Invest project={selectedProject} />
+              <Invest
+                getUserProjectInvestment={getUserProjectInvestment}
+                userAddress={userAddress}
+                walletType={walletType}
+                checkAllowance={checkAllowance}
+                isBUSDApproved={isBUSDApproved}
+                project={selectedProject}
+              />
               <Claim
+                isLoading={isLoading}
+                handleClaim={handleClaim}
                 userInvestment={userInvestment}
                 project={selectedProject}
               />

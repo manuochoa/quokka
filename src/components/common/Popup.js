@@ -31,9 +31,7 @@ export default function Popup({
       onClick={closePopup}
     >
       <div className="popup__wrapper">
-        {userAddress
-          ? `${userAddress.slice(0, 6)}...${userAddress.slice(-10)}`
-          : children}
+        { children}
       </div>
     </div>
   );
