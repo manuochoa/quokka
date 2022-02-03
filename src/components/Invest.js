@@ -9,6 +9,8 @@ export default function Invest({
   isBUSDApproved,
   getUserProjectInvestment,
   project,
+  BUSDBalance,
+  truncateToDecimals,
   ...props
 }) {
   const [value, setValue] = useState(0);
@@ -37,7 +39,10 @@ export default function Invest({
   return (
     <div className="main__background invest" {...props}>
       <h1 className="invest__title title">Invest</h1>
+      <h4>BUSD Balance: {truncateToDecimals(BUSDBalance / 10 ** 18, 2)}</h4>
       <Input
+        truncateToDecimals={truncateToDecimals}
+        BUSDBalance={BUSDBalance}
         value={value}
         setValue={setValue}
         className="input-wrapper--invest"

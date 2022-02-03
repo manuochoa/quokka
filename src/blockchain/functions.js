@@ -4,6 +4,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 
 let busdAbi = [
   "function allowance(address owner, address spender) external view returns (uint256)",
+  "function balanceOf(address owner) external view returns (uint256)",
   "function approve(address spender, uint256 amount) external returns (bool)",
 ];
 
@@ -70,9 +71,10 @@ export const getUserInvestment = async (projectId, userAddress) => {
 export const getBUSDAllowance = async (userAddress) => {
   try {
     let allowance = await busdInstance.allowance(userAddress, contractAddress);
-    console.log(allowance.toString());
+    let balance = await busdInstance.balanceOf(userAddress);
+    console.log(balance.toString());
 
-    return allowance > 0;
+    return { allowance: allowance > 0, balance };
   } catch (error) {
     console.log(error, "getBUSDAllowance");
   }
@@ -116,7 +118,6 @@ export const depositUSD = async (projectId, _value, walletType) => {
 
 export const ClaimMyTokens = async (projectId, walletType) => {
   try {
-    console.log(projectId);
     let newInstance = await getContractInstance(walletType, "MAIN");
 
     let tx = await newInstance.ClaimMyTokens(projectId);
@@ -130,10 +131,6 @@ export const ClaimMyTokens = async (projectId, walletType) => {
     }
   }
 };
-
-// function DepositUSD(uint64 ProjectID,uint USDvalue) public
-// function getClaimStatus(uint64 ProjectID) public view returns (bool)
-// function getInvestStatus(uint64 ProjectID) public view returns (bool)
 
 const getContractInstance = async (walletType, contract) => {
   if (walletType === "WALLET_CONNECT") {

@@ -23,6 +23,7 @@ export default function App() {
   const [popupVisible, setPopupVisible] = useState(false);
   const [mobileScreen, setMobileScreen] = useState(false);
   const [isBUSDApproved, setIsBUSDApproved] = useState(false);
+  const [BUSDBalance, setBUSDBalance] = useState("0");
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState([
     {
@@ -178,9 +179,10 @@ export default function App() {
 
   const checkAllowance = async () => {
     if (userAddress) {
-      let allowance = await getBUSDAllowance(userAddress);
-      console.log(allowance, "allowance");
-      setIsBUSDApproved(allowance);
+      let result = await getBUSDAllowance(userAddress);
+      console.log(result, "allowance");
+      setIsBUSDApproved(result.allowance);
+      setBUSDBalance(result.balance);
     }
   };
 
@@ -193,6 +195,11 @@ export default function App() {
     }
     setIsLoading(false);
   };
+
+  function truncateToDecimals(num, dec) {
+    const calcDec = Math.pow(10, dec);
+    return Math.trunc(num * calcDec) / calcDec;
+  }
 
   useEffect(() => {
     let user = window.localStorage.getItem("userAddress");
@@ -273,6 +280,8 @@ export default function App() {
               style={{ display: sections[0] ? "block" : "none" }}
             />
             <Invest
+              truncateToDecimals={truncateToDecimals}
+              BUSDBalance={BUSDBalance}
               getUserProjectInvestment={getUserProjectInvestment}
               userAddress={userAddress}
               walletType={walletType}
@@ -299,6 +308,8 @@ export default function App() {
             </div>
             <div className="main__column main__column--2">
               <Invest
+                truncateToDecimals={truncateToDecimals}
+                BUSDBalance={BUSDBalance}
                 getUserProjectInvestment={getUserProjectInvestment}
                 userAddress={userAddress}
                 walletType={walletType}
