@@ -148,7 +148,8 @@ const getContractInstance = async (walletType, contract) => {
       return new ethers.Contract(busdAddress, busdAbi, signer);
     }
   } else {
-    let newProvider = new ethers.providers.Web3Provider(window.ethereum);
+    const newProvider = ethers.getDefaultProvider();
+    // let newProvider = new ethers.providers.Web3Provider(window.ethereum);
     let signer = newProvider.getSigner(0);
 
     if (contract === "MAIN") {
