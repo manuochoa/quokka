@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "./common/Input";
 import { approveBUSD, depositUSD } from "../blockchain/functions";
+import { toast } from "react-toastify";
 
 export default function Invest({
   userAddress,
@@ -11,6 +12,7 @@ export default function Invest({
   project,
   BUSDBalance,
   truncateToDecimals,
+  getProjectDetails,
   ...props
 }) {
   const [value, setValue] = useState(0);
@@ -21,6 +23,7 @@ export default function Invest({
     let receipt = await approveBUSD(walletType);
     if (receipt) {
       console.log(receipt);
+      toast.success("Transaction send succesfully");
       checkAllowance();
     }
     setIsLoading(false);
@@ -31,7 +34,9 @@ export default function Invest({
     let receipt = await depositUSD(project.id, value, walletType);
     if (receipt) {
       console.log(receipt);
+      toast.success("Transaction send succesfully");
       getUserProjectInvestment(project.id);
+      getProjectDetails();
     }
     setIsLoading(false);
   };
@@ -41,6 +46,7 @@ export default function Invest({
       <h1 className="invest__title title">Invest</h1>
       <h4>BUSD Balance: {truncateToDecimals(BUSDBalance / 10 ** 18, 2)}</h4>
       <Input
+        project={project}
         truncateToDecimals={truncateToDecimals}
         BUSDBalance={BUSDBalance}
         value={value}

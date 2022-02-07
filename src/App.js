@@ -1,7 +1,6 @@
 import Header from "./components/Header";
 import NotificationProvider from "./contexts/NotificationProvider";
 import Select from "./components/common/Select";
-
 import netflixIcon from "./images/icons/netflix.svg";
 import Statistics from "./components/Statistics";
 import Invest from "./components/Invest";
@@ -16,6 +15,7 @@ import {
   ClaimMyTokens,
 } from "./blockchain/functions";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { toast } from "react-toastify";
 
 export default function App() {
   const [userAddress, setUserAddress] = useState("");
@@ -171,7 +171,6 @@ export default function App() {
     if (userAddress) {
       let investment = await getUserInvestment(id, userAddress);
       if (investment) {
-        console.log(investment);
         setUserInvestment(investment);
       }
     }
@@ -180,7 +179,6 @@ export default function App() {
   const checkAllowance = async () => {
     if (userAddress) {
       let result = await getBUSDAllowance(userAddress);
-      console.log(result, "allowance");
       setIsBUSDApproved(result.allowance);
       setBUSDBalance(result.balance);
     }
@@ -191,9 +189,24 @@ export default function App() {
     let receipt = await ClaimMyTokens(projectId, walletType);
     if (receipt) {
       console.log(receipt);
+      toast.success("Transaction send succesfully");
       getUserProjectInvestment(projectId);
+      getProjectDetails();
     }
     setIsLoading(false);
+  };
+
+  const getProjectDetails = async () => {
+    let details = await getActiveProjects();
+    if (details) {
+      setProjects(details);
+      let currentProject = details.find((el) => el.id === selectedProject.id);
+      if (currentProject) {
+        setSelectedProject(details.find((el) => el.id === selectedProject.id));
+      } else {
+        setSelectedProject(details[0]);
+      }
+    }
   };
 
   function truncateToDecimals(num, dec) {
@@ -222,13 +235,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const getProjectDetails = async () => {
-      let details = await getActiveProjects();
-      if (details) {
-        console.log(details);
-        setProjects(details);
-      }
-    };
     getProjectDetails();
   }, []);
 
@@ -280,6 +286,7 @@ export default function App() {
               style={{ display: sections[0] ? "block" : "none" }}
             />
             <Invest
+              getProjectDetails={getProjectDetails}
               truncateToDecimals={truncateToDecimals}
               BUSDBalance={BUSDBalance}
               getUserProjectInvestment={getUserProjectInvestment}
@@ -308,6 +315,7 @@ export default function App() {
             </div>
             <div className="main__column main__column--2">
               <Invest
+                getProjectDetails={getProjectDetails}
                 truncateToDecimals={truncateToDecimals}
                 BUSDBalance={BUSDBalance}
                 getUserProjectInvestment={getUserProjectInvestment}

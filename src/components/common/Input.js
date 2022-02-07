@@ -7,10 +7,17 @@ export default function Input({
   value,
   setValue,
   truncateToDecimals,
+  project,
   onClick,
 }) {
   function handleInputChange({ value }) {
-    setValue(value);
+    if (value > Number(project.MaxInvest)) {
+      setValue(Number(project.MaxInvest));
+    } else if (value < 0) {
+      setValue(0);
+    } else {
+      setValue(value);
+    }
   }
 
   return (

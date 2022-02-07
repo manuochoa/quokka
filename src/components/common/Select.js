@@ -20,7 +20,6 @@ export default function Select({
       }))
     );
     setSelectedProject(selectList[index]);
-    console.log(index);
     callback && callback(index);
   }
 
@@ -44,7 +43,7 @@ export default function Select({
 
   useEffect(() => {
     setSelectList(list);
-    setSelectedProject(list.find((item) => item.selected === true));
+    // setSelectedProject(list.find((item) => item.selected === true));
   }, [list]);
 
   return (

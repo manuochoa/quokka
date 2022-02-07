@@ -1,6 +1,7 @@
-import { ethers, providers } from "ethers";
+import { ethers } from "ethers";
 import { abi } from "./abi";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { toast } from "react-toastify";
 
 let busdAbi = [
   "function allowance(address owner, address spender) external view returns (uint256)",
@@ -29,18 +30,19 @@ export const getActiveProjects = async () => {
         let countdown = await contractInstance.getCountDown(el);
         let claimStatus = await contractInstance.getClaimStatus(el);
         let investStatus = await contractInstance.getInvestStatus(el);
+        let payoutSymbol = await contractInstance.getPayoutSymbol(el);
 
         return {
           ...details,
           claimStatus,
           investStatus,
           countdown,
+          payoutSymbol,
           selected: index === 0 ? true : false,
           id: Number(el),
         };
       })
     );
-
     return projectsDetails;
   } catch (error) {
     console.log(error, "getActiveProjects");
@@ -72,7 +74,6 @@ export const getBUSDAllowance = async (userAddress) => {
   try {
     let allowance = await busdInstance.allowance(userAddress, contractAddress);
     let balance = await busdInstance.balanceOf(userAddress);
-    console.log(balance.toString());
 
     return { allowance: allowance > 0, balance };
   } catch (error) {
@@ -111,7 +112,8 @@ export const depositUSD = async (projectId, _value, walletType) => {
   } catch (error) {
     console.log(error, "depositUSD");
     if (error.data) {
-      window.alert(error.data.message);
+      toast.error(error.data.message);
+      // window.alert(error.data.message);
     }
   }
 };
@@ -127,7 +129,8 @@ export const ClaimMyTokens = async (projectId, walletType) => {
   } catch (error) {
     console.log(error, "ClaimMyTokens");
     if (error.data) {
-      window.alert(error.data.message);
+      toast.error(error.data.message);
+      // window.alert(error.data.message);
     }
   }
 };

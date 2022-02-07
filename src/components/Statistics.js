@@ -1,6 +1,10 @@
 import Goto from "./../Icons/Goto";
 
 export default function Statistics({ userInvestment, project, ...props }) {
+  const getDate = () => {
+    var today = new Date();
+    return today.toISOString().substring(0, 10);
+  };
   return (
     <ul className="stats main__background" {...props}>
       <li className="stats__section">
@@ -10,9 +14,7 @@ export default function Statistics({ userInvestment, project, ...props }) {
             <Goto className="stats__goto-icon" />
           </button>
         </div>
-        <time className="stats__text stats__text--date">
-          Monday, January 17
-        </time>
+        <time className="stats__text stats__text--date">{`${getDate()}`}</time>
       </li>
       <li className="stats__section">
         <div className="stats__progress">
@@ -20,7 +22,12 @@ export default function Statistics({ userInvestment, project, ...props }) {
           <div className="stats__progress-bar">
             <span
               className="stats__progress-track"
-              style={{ width: `${Number(project.PercInvested)}%` }}
+              style={{
+                width:
+                  Number(project.PercInvested) <= 100
+                    ? `${Number(project.PercInvested)}%`
+                    : "100%",
+              }}
             ></span>
           </div>
           <div className="stats__progress-row">
@@ -37,14 +44,24 @@ export default function Statistics({ userInvestment, project, ...props }) {
             Tokens Distributed
           </h4>
           <div className="stats__progress-bar">
-            <span className="stats__progress-track" style={{ width: 0 }}></span>
+            <span
+              className="stats__progress-track"
+              style={{
+                width:
+                  `${Number(
+                    (project.TokensPaidOut * 100) / project.TotalTokens
+                  )}%` || "0%",
+              }}
+            ></span>
           </div>
           <div className="stats__progress-row">
             <span className="stats__progress-text">
-              {Number(project.TokensPaidOut / project.PayoutDecimals) || "0"}
+              {Number(project.TokensPaidOut / 10 ** project.PayoutDecimals) ||
+                "0"}
             </span>
             <span className="stats__progress-text">
-              {Number(project.TotalTokens / project.PayoutDecimals) || "0"}
+              {Number(project.TotalTokens / 10 ** project.PayoutDecimals) ||
+                "0"}
             </span>
           </div>
         </div>
@@ -84,13 +101,17 @@ export default function Statistics({ userInvestment, project, ...props }) {
           <li className="stats__item">
             <span className="stats__text">Tokens to claim</span>
             <span className="stats__text stats__text--value">
-              {userInvestment.claimableTokens.toString()}
+              {Number(
+                userInvestment.claimableTokens / 10 ** project.PayoutDecimals
+              ).toFixed(4)}
             </span>
           </li>
           <li className="stats__item">
             <span className="stats__text">Tokens paid out</span>
             <span className="stats__text stats__text--value">
-              {userInvestment.tokensReceived.toString()}
+              {Number(
+                userInvestment.tokensReceived / 10 ** project.PayoutDecimals
+              ).toFixed(4)}
             </span>
           </li>
         </ul>
