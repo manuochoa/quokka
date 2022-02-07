@@ -23,7 +23,7 @@ export default function Invest({
     let receipt = await approveBUSD(walletType);
     if (receipt) {
       console.log(receipt);
-      toast.success("Transaction send succesfully");
+      toast.success("Transaction sent succesfully");
       checkAllowance();
     }
     setIsLoading(false);
@@ -34,7 +34,7 @@ export default function Invest({
     let receipt = await depositUSD(project.id, value, walletType);
     if (receipt) {
       console.log(receipt);
-      toast.success("Transaction send succesfully");
+      toast.success("Transaction sent succesfully");
       getUserProjectInvestment(project.id);
       getProjectDetails();
     }

@@ -189,7 +189,7 @@ export default function App() {
     let receipt = await ClaimMyTokens(projectId, walletType);
     if (receipt) {
       console.log(receipt);
-      toast.success("Transaction send succesfully");
+      toast.success("Transaction sent succesfully");
       getUserProjectInvestment(projectId);
       getProjectDetails();
     }

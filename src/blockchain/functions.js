@@ -13,7 +13,7 @@ let provider = new ethers.providers.JsonRpcProvider(
   "https://speedy-nodes-nyc.moralis.io/1d19a6082204e3ecd8dcf0b9/bsc/testnet"
 );
 
-let contractAddress = "0x1400c2c8E9fC46f0Ff62D4a92c37dDc6b049394b";
+let contractAddress = "0x24BBAe2D153d156048747683B4E1ebAbBc936451";
 let busdAddress = "0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7";
 
 let contractInstance = new ethers.Contract(contractAddress, abi, provider);
