@@ -6,21 +6,22 @@ export default function Select({
   className,
   list,
   callback,
+  selectedTitle,
   setSelectedProject,
 }) {
-  const [selectList, setSelectList] = useState(list);
+  // const [selectList, setSelectList] = useState(list);
   const [opened, setOpened] = useState(false);
-  let selectedTitle = selectList.find((item) => item.selected === true).Name;
+  // let selectedTitle = selectList.find((item) => item.selected === true).Name;
 
   function selectItem(index) {
-    setSelectList((state) =>
-      state.map((item, itemIndex) => ({
-        ...item,
-        selected: itemIndex === index ? true : false,
-      }))
-    );
-    setSelectedProject(selectList[index]);
-    callback && callback(index);
+    // setSelectList((state) =>
+    //   state.map((item, itemIndex) => ({
+    //     ...item,
+    //     selected: itemIndex === index ? true : false,
+    //   }))
+    // );
+    setSelectedProject(list[index]);
+    // callback && callback(index);
   }
 
   function toggleSelect() {
@@ -41,10 +42,10 @@ export default function Select({
     };
   }, [opened]);
 
-  useEffect(() => {
-    setSelectList(list);
-    // setSelectedProject(list.find((item) => item.selected === true));
-  }, [list]);
+  // useEffect(() => {
+  //   setSelectList(list);
+  //   // setSelectedProject(list.find((item) => item.selected === true));
+  // }, [list]);
 
   return (
     <div
@@ -56,17 +57,18 @@ export default function Select({
       }
     >
       <button className="select__button" onClick={toggleSelect}>
-        <span className="select__button-text">{selectedTitle}</span>
+        <span className="select__button-text">{selectedTitle.Name}</span>
         <Arrow className="select__button-icon" />
       </button>
       <div className="select__list-wrapper">
         <ul className="select__list scrollwrapper select__scrollwrapper">
-          {selectList.map((item, index) => {
+          {list.map((item, index) => {
             return (
               <li className="select__item" key={item.id}>
                 <button
                   className={
-                    "select__item-button" + (item.selected ? " selected" : "")
+                    "select__item-button" +
+                    (item.id === selectedTitle.id ? " selected" : "")
                   }
                   onClick={() => {
                     selectItem(index);

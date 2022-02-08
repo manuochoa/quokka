@@ -258,6 +258,7 @@ export default function App() {
             <Select
               className="select--main"
               list={projects}
+              selectedTitle={selectedProject}
               setSelectedProject={setSelectedProject}
             />
           </div>
