@@ -48,9 +48,11 @@ export default function Statistics({ userInvestment, project, ...props }) {
               className="stats__progress-track"
               style={{
                 width:
-                  `${Number(
-                    (project.TokensPaidOut * 100) / project.TotalTokens
-                  )}%` || "0%",
+                  Number(project.TokensPaidOut) === 0
+                    ? "0%"
+                    : `${Number(
+                        (project.TokensPaidOut * 100) / project.totalTokens
+                      )}%` || "0%",
               }}
             ></span>
           </div>
@@ -60,7 +62,7 @@ export default function Statistics({ userInvestment, project, ...props }) {
                 "0"}
             </span>
             <span className="stats__progress-text">
-              {Number(project.TotalTokens / 10 ** project.PayoutDecimals) ||
+              {Number(project.totalTokens / 10 ** project.PayoutDecimals) ||
                 "0"}
             </span>
           </div>

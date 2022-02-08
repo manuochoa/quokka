@@ -190,7 +190,6 @@ export default function App() {
     if (receipt) {
       console.log(receipt);
       toast.success("Transaction sent succesfully");
-      getUserProjectInvestment(projectId);
       getProjectDetails();
     }
     setIsLoading(false);

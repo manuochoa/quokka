@@ -35,8 +35,8 @@ export default function Invest({
     if (receipt) {
       console.log(receipt);
       toast.success("Transaction sent succesfully");
-      getUserProjectInvestment(project.id);
       getProjectDetails();
+      checkAllowance();
     }
     setIsLoading(false);
   };

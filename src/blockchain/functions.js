@@ -13,7 +13,7 @@ let provider = new ethers.providers.JsonRpcProvider(
   "https://speedy-nodes-nyc.moralis.io/1d19a6082204e3ecd8dcf0b9/bsc/testnet"
 );
 
-let contractAddress = "0x24BBAe2D153d156048747683B4E1ebAbBc936451";
+let contractAddress = "0xF2c3628b8c3cB66C7f7391E2F9d87A9a89c040B9";
 let busdAddress = "0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7";
 
 let contractInstance = new ethers.Contract(contractAddress, abi, provider);
@@ -43,6 +43,7 @@ export const getActiveProjects = async () => {
         };
       })
     );
+    console.log(projectsDetails);
     return projectsDetails;
   } catch (error) {
     console.log(error, "getActiveProjects");
